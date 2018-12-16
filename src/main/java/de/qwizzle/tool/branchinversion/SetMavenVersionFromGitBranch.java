@@ -34,18 +34,11 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
-/**
- * Mojo which Maven Mojo, das den aktuellen git Branch gegen die Versionsnummer abgleicht und den
- * Maven Build failen lässt, falls das Issue aus dem Branch nicht in der Version vorkommt. Die
- * branches develop, master und alle release Branches werden ignoriert.
- *
- * @author Mark Schäfer
- */
 @Mojo(name = "set", defaultPhase = LifecyclePhase.PRE_CLEAN, threadSafe = false, requiresProject = false,
     inheritByDefault = false)
 public class SetMavenVersionFromGitBranch extends AbstractMojo
 {
-    private static final int MAX_LEVENSHTEIN_EDIT_DISTANCE = 4;
+    private static final int MAX_LEVENSHTEIN_EDIT_DISTANCE = 10;
 
     static final String ISSUE_KEY_REGEX = "\\w\\w+\\-\\d+";
 
@@ -188,7 +181,7 @@ public class SetMavenVersionFromGitBranch extends AbstractMojo
     List<String> getPossibleVariables(String gitBranchEnvironmentVariable2)
     {
         List<String> result = new LinkedList<>();
-        for (String env : System.getenv().values())
+        for (String env : System.getenv().keySet())
         {
             if (LevenshteinDistance.getDefaultInstance().apply(env,
                 gitBranchEnvironmentVariable2) <= MAX_LEVENSHTEIN_EDIT_DISTANCE)
