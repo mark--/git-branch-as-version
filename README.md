@@ -71,6 +71,7 @@ with the following configuration:
 				<versionPattern>...</versionPattern>
 				<branchFromEnvironment>...</branchFromEnvironment>
 				<branchEnvironmentVariable>...</branchEnvironmentVariable>
+				<releaseBranchPattern>...</releaseBranchPattern>
 			</configuration>
 		</execution>
 	</executions>
@@ -83,11 +84,11 @@ with the following configuration:
 The plugin supports the follwing configuration options. The default works with JIRA issue IDs in the branch name and Jenkins as build server.
 
 
-|Property|Default|Description|
-|--------|-------|-----------|
-|branchPattern|(\\w+\\-\\w+).*|A Java regex which is matched against the last component of the git branch name. The first capturing group is taken as the branch identifier which is used for the final Maven version.|
-|versionPattern|(\\d+\\.\\d+\\.\\d+).*|A Java regex which is matched against the project version. The first capturing group is taken as the version for the final Maven version.
-|branchFromEnvironment|true|Detect the current branch by some environment variable. If set to false, the plugin tries to detect the version by looking into the git repository.|
-|branchEnvironmentVariable|GIT_BRANCH|The environment variable which contains the current branch. If the environment variable is not present, the plugin tries to detect the version by looking into the git repository.|
-
+| Property                  | Default                | Description                                                                                                                                                                             |
+| ------------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| branchPattern             | (\\w+\\-\\w+).*        | A Java regex which is matched against the last component of the git branch name. The first capturing group is taken as the branch identifier which is used for the final Maven version. |
+| versionPattern            | (\\d+\\.\\d+\\.\\d+).* | A Java regex which is matched against the project version. The first capturing group is taken as the version for the final Maven version.                                               |
+| branchFromEnvironment     | true                   | Detect the current branch by some environment variable. If set to false, the plugin tries to detect the version by looking into the git repository.                                     |
+| branchEnvironmentVariable | GIT_BRANCH             | The environment variable which contains the current branch. If the environment variable is not present, the plugin tries to detect the version by looking into the git repository.      |
+| releaseBranchPattern      | ^release/.*            | Regex which is used to detect release branches.                                                                                                                                         |
 
