@@ -65,7 +65,6 @@ with the following configuration:
 			<goals>
 				<goal>set</goal>
 			</goals>
-			<inherited>true</inherited>
 			<configuration>
 				<branchPattern>...</branchPattern>
 				<versionPattern>...</versionPattern>
@@ -77,6 +76,8 @@ with the following configuration:
 	</executions>
 </plugin>
 ````
+
+For module projects it is important that `<inherited>false</inherited>` is set (the plugin has this as default). Otherwise the plugin will be executed for every module which will fail.
 
 
 ## Configuration
